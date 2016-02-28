@@ -1,5 +1,6 @@
 package com.vettukal.pcsma.file.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.google.common.collect.Lists;
 import com.vettukal.pcsma.file.client.FileSvcApi;
 import com.vettukal.pcsma.file.repository.File;
 import com.vettukal.pcsma.file.repository.FileRepository;
+import com.vettukal.pcsma.file.test.TestData;
 
 /**
  * This simple VideoSvc allows clients to send HTTP POST requests with
@@ -77,7 +79,11 @@ public class FileSvc implements FileSvcApi {
 	// annotation.
 	@RequestMapping(value=FileSvcApi.FILE_SVC_PATH, method=RequestMethod.GET)
 	public @ResponseBody Collection<File> getVideoList(){
-		return Lists.newArrayList(videos.findAll());
+		ArrayList al = Lists.newArrayList(videos.findAll());
+		if(al.size()==0){
+			al.add(TestData.randomVideo());
+		}
+		return al;
 	}
 	
 	// Receives GET requests to /video/find and returns all Videos
