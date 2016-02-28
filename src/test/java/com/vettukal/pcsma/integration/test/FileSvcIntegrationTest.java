@@ -1,4 +1,4 @@
-package org.magnum.mobilecloud.integration.test;
+package com.vettukal.pcsma.integration.test;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -9,11 +9,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.magnum.mobilecloud.video.Application;
-import org.magnum.mobilecloud.video.TestData;
-import org.magnum.mobilecloud.video.client.VideoSvcApi;
-import org.magnum.mobilecloud.video.controller.VideoSvc;
-import org.magnum.mobilecloud.video.repository.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationContextLoader;
 import org.springframework.http.MediaType;
@@ -24,6 +19,12 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import com.vettukal.pcsma.file.Application;
+import com.vettukal.pcsma.file.client.FileSvcApi;
+import com.vettukal.pcsma.file.controller.FileSvc;
+import com.vettukal.pcsma.file.repository.File;
+import com.vettukal.pcsma.file.test.TestData;
 
 /**
  * 
@@ -53,12 +54,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 // This is where you tell Spring the Application or Configuration object to use
 @ContextConfiguration(classes = Application.class, loader = SpringApplicationContextLoader.class)
-public class VideoSvcIntegrationTest {
+public class FileSvcIntegrationTest {
 
 	// Ask Spring to automatically construct and inject your VideoSvc
 	// into the test
 	@Autowired
-	private VideoSvc videoService;
+	private FileSvc videoService;
 
 	// This is the mock interface to our application that we will use to 
 	// send mock HTTP requests
@@ -78,13 +79,13 @@ public class VideoSvcIntegrationTest {
 	// real objects that you specify in your Application class.
 	@Test
 	public void testVideoAddAndList() throws Exception {
-		Video video = TestData.randomVideo();
+		File video = TestData.randomVideo();
 		String videoJson = TestData.toJson(video);
 		
 		// Send a request that should invoke VideoSvc.addVideo(Video v)
 		// and check that the request succeeded
 		mockMvc.perform(
-				post(VideoSvcApi.VIDEO_SVC_PATH)
+				post(FileSvcApi.FILE_SVC_PATH)
 				.contentType(MediaType.APPLICATION_JSON)
 	            .content(videoJson))
 	            .andExpect(status().isOk())
@@ -94,7 +95,7 @@ public class VideoSvcIntegrationTest {
 		// and check that the Video object that we added above (as JSON)
 		// is in the list of returned videos
 		mockMvc.perform(
-				get(VideoSvcApi.VIDEO_SVC_PATH))
+				get(FileSvcApi.FILE_SVC_PATH))
 	            .andExpect(status().isOk())
 	            .andExpect(content().string(containsString(videoJson)))
 	            .andReturn();

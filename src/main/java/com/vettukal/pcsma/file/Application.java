@@ -1,6 +1,5 @@
-package org.magnum.mobilecloud.video;
+package com.vettukal.pcsma.file;
 
-import org.magnum.mobilecloud.video.repository.VideoRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,12 +7,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.vettukal.pcsma.file.repository.FileRepository;
+
 //Tell Spring to automatically inject any dependencies that are marked in
 //our classes with @Autowired
 @EnableAutoConfiguration
 // Tell Spring to automatically create a JPA implementation of our
 // VideoRepository
-@EnableJpaRepositories(basePackageClasses = VideoRepository.class)
+@EnableJpaRepositories(basePackageClasses = FileRepository.class)
 // Tell Spring that this object represents a Configuration for the
 // application
 @Configuration

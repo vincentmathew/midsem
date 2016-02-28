@@ -1,4 +1,4 @@
-package org.magnum.mobilecloud.video.repository;
+package com.vettukal.pcsma.file.repository;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +14,7 @@ import com.google.common.base.Objects;
  * 
  */
 @Entity
-public class Video {
+public class File {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,10 +24,10 @@ public class Video {
 	private String url;
 	private long duration;
 
-	public Video() {
+	public File() {
 	}
 
-	public Video(String name, String url, long duration) {
+	public File(String name, String url, long duration) {
 		super();
 		this.name = name;
 		this.url = url;
@@ -84,8 +84,8 @@ public class Video {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Video) {
-			Video other = (Video) obj;
+		if (obj instanceof File) {
+			File other = (File) obj;
 			// Google Guava provides great utilities for equals too!
 			return Objects.equal(name, other.name)
 					&& Objects.equal(url, other.url)

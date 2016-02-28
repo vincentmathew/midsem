@@ -1,4 +1,4 @@
-package org.magnum.mobilecloud.controller.test;
+package com.vettukal.pcsma.controller.test;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
@@ -8,13 +8,14 @@ import java.util.Collection;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.magnum.mobilecloud.video.TestData;
-import org.magnum.mobilecloud.video.controller.VideoSvc;
-import org.magnum.mobilecloud.video.repository.Video;
-import org.magnum.mobilecloud.video.repository.VideoRepository;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import com.vettukal.pcsma.file.controller.FileSvc;
+import com.vettukal.pcsma.file.repository.File;
+import com.vettukal.pcsma.file.repository.FileRepository;
+import com.vettukal.pcsma.file.test.TestData;
 
 /**
  * 
@@ -34,21 +35,21 @@ import org.mockito.MockitoAnnotations;
  * @author jules
  *
  */
-public class VideoSvcTest {
+public class FileSvcTest {
 
 	// This tells Mockito to create a mock object for the VideoRepository
 	// implementation that will be used for this test. A mock object is a
 	// "fake" implementation of the interface that we can script to provide
 	// specific outputs in response to different inputs.
 	@Mock
-	private VideoRepository videoRepository;
+	private FileRepository videoRepository;
 
 	// Automatically inject the mock VideoRepository into the VideoSvc
 	// object
 	@InjectMocks
-	private VideoSvc videoService;
+	private FileSvc videoService;
 
-	private Video video = TestData.randomVideo();
+	private File video = TestData.randomVideo();
 
 	@Before
 	public void setUp() {
@@ -74,7 +75,7 @@ public class VideoSvcTest {
 		assertTrue(ok);
 
 		// Make sure that the Video we added is in the list
-		Collection<Video> videos = videoService.getVideoList();
+		Collection<File> videos = videoService.getVideoList();
 		assertTrue(videos.contains(video));
 	}
 

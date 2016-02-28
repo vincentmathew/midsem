@@ -1,4 +1,4 @@
-package org.magnum.mobilecloud.video.repository;
+package com.vettukal.pcsma.file.repository;
 
 import java.util.Collection;
 
@@ -13,9 +13,9 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public interface VideoRepository extends CrudRepository<Video, Long>{
+public interface FileRepository extends CrudRepository<File, Long>{
 
 	// Find all videos with a matching title (e.g., Video.name)
-	public Collection<Video> findByName(String title);
+	public Collection<File> findByName(String title);
 	
 }

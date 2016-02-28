@@ -1,13 +1,14 @@
-package org.magnum.mobilecloud.integration.test;
+package com.vettukal.pcsma.integration.test;
 
 import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
 
 import org.junit.Test;
-import org.magnum.mobilecloud.video.TestData;
-import org.magnum.mobilecloud.video.client.VideoSvcApi;
-import org.magnum.mobilecloud.video.repository.Video;
+
+import com.vettukal.pcsma.file.client.FileSvcApi;
+import com.vettukal.pcsma.file.repository.File;
+import com.vettukal.pcsma.file.test.TestData;
 
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
@@ -33,15 +34,15 @@ import retrofit.RestAdapter.LogLevel;
  * @author jules
  *
  */
-public class VideoSvcClientApiTest {
+public class FileSvcClientApiTest {
 
 	private final String TEST_URL = "http://localhost:8080";
 
-	private VideoSvcApi videoService = new RestAdapter.Builder()
+	private FileSvcApi videoService = new RestAdapter.Builder()
 			.setEndpoint(TEST_URL).setLogLevel(LogLevel.FULL).build()
-			.create(VideoSvcApi.class);
+			.create(FileSvcApi.class);
 
-	private Video video = TestData.randomVideo();
+	private File video = TestData.randomVideo();
 	
 	/**
 	 * This test creates a Video, adds the Video to the VideoSvc, and then
@@ -58,7 +59,7 @@ public class VideoSvcClientApiTest {
 		assertTrue(ok);
 
 		// We should get back the video that we added above
-		Collection<Video> videos = videoService.getVideoList();
+		Collection<File> videos = videoService.getVideoList();
 		assertTrue(videos.contains(video));
 	}
 

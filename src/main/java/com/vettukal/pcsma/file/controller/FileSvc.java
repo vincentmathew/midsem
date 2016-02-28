@@ -1,10 +1,7 @@
-package org.magnum.mobilecloud.video.controller;
+package com.vettukal.pcsma.file.controller;
 
 import java.util.Collection;
 
-import org.magnum.mobilecloud.video.client.VideoSvcApi;
-import org.magnum.mobilecloud.video.repository.Video;
-import org.magnum.mobilecloud.video.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.Lists;
+import com.vettukal.pcsma.file.client.FileSvcApi;
+import com.vettukal.pcsma.file.repository.File;
+import com.vettukal.pcsma.file.repository.FileRepository;
 
 /**
  * This simple VideoSvc allows clients to send HTTP POST requests with
@@ -35,7 +35,7 @@ import com.google.common.collect.Lists;
 // Tell Spring that this class is a Controller that should 
 // handle certain HTTP requests for the DispatcherServlet
 @Controller
-public class VideoSvc implements VideoSvcApi {
+public class FileSvc implements FileSvcApi {
 	
 	// The VideoRepository that we are going to store our videos
 	// in. We don't explicitly construct a VideoRepository, but
@@ -48,7 +48,7 @@ public class VideoSvc implements VideoSvcApi {
 	// do the injection.
 	//
 	@Autowired
-	private VideoRepository videos;
+	private FileRepository videos;
 
 	// Receives POST requests to /video and converts the HTTP
 	// request body, which should contain json, into a Video
@@ -65,8 +65,8 @@ public class VideoSvc implements VideoSvcApi {
 	// client and service paths for the VideoSvc are always
 	// in synch.
 	//
-	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH, method=RequestMethod.POST)
-	public @ResponseBody boolean addVideo(@RequestBody Video v){
+	@RequestMapping(value=FileSvcApi.FILE_SVC_PATH, method=RequestMethod.POST)
+	public @ResponseBody boolean addVideo(@RequestBody File v){
 		 videos.save(v);
 		 return true;
 	}
@@ -75,16 +75,16 @@ public class VideoSvc implements VideoSvcApi {
 	// list of videos in memory. Spring automatically converts
 	// the list of videos to JSON because of the @ResponseBody
 	// annotation.
-	@RequestMapping(value=VideoSvcApi.VIDEO_SVC_PATH, method=RequestMethod.GET)
-	public @ResponseBody Collection<Video> getVideoList(){
+	@RequestMapping(value=FileSvcApi.FILE_SVC_PATH, method=RequestMethod.GET)
+	public @ResponseBody Collection<File> getVideoList(){
 		return Lists.newArrayList(videos.findAll());
 	}
 	
 	// Receives GET requests to /video/find and returns all Videos
 	// that have a title (e.g., Video.name) matching the "title" request
 	// parameter value that is passed by the client
-	@RequestMapping(value=VideoSvcApi.VIDEO_TITLE_SEARCH_PATH, method=RequestMethod.GET)
-	public @ResponseBody Collection<Video> findByTitle(
+	@RequestMapping(value=FileSvcApi.VIDEO_TITLE_SEARCH_PATH, method=RequestMethod.GET)
+	public @ResponseBody Collection<File> findByTitle(
 			// Tell Spring to use the "title" parameter in the HTTP request's query
 			// string as the value for the title method parameter
 			@RequestParam(TITLE_PARAMETER) String title

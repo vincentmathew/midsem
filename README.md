@@ -16,7 +16,7 @@ select Terminate
 To view a list of the videos that have been added, open your browser to the following
 URL:
 
-http://localhost:8080/video
+http://localhost:8080/file
 
 To add a test video, run the VideoSvcClientApiTest by right-clicking on it in 
 Eclipse->Run As->JUnit Test (make sure that you run the application first!)

@@ -1,10 +1,9 @@
-package org.magnum.mobilecloud.video;
+package com.vettukal.pcsma.file.test;
 
 import java.util.UUID;
 
-import org.magnum.mobilecloud.video.repository.Video;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vettukal.pcsma.file.repository.File;
 
 /**
  * This is a utility class to aid in the construction of
@@ -27,14 +26,14 @@ public class TestData {
 	 * 
 	 * @return
 	 */
-	public static Video randomVideo() {
+	public static File randomVideo() {
 		// Information about the video
 		// Construct a random identifier using Java's UUID class
 		String id = UUID.randomUUID().toString();
 		String title = "Video-"+id;
 		String url = "http://coursera.org/some/video-"+id;
 		long duration = 60 * (int)Math.rint(Math.random() * 60) * 1000; // random time up to 1hr
-		return new Video(title, url, duration);
+		return new File(title, url, duration);
 	}
 	
 	/**
